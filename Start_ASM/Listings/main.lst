@@ -1,0 +1,246 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         
+    2 00000000         ; Define address
+    3 00000000         ; Same: #define RAM1_ADD 0x200000020
+    4 00000000 20000020 
+                       RAM1_ADD
+                               EQU              0x20000020
+    5 00000000 20000030 
+                       RAM2_ADD
+                               EQU              0x20000030
+    6 00000000         
+    7 00000000         ; Start code 
+    8 00000000                 AREA             Start, CODE, READONLY
+    9 00000000                 ENTRY
+   10 00000000                 EXPORT           __main
+   11 00000000         
+   12 00000000         
+   13 00000000         
+   14 00000000         __main
+   15 00000000 F04F 0001       LDR              R0,=1       ; load 1 to R0
+   16 00000004 F04F 0102       LDR              R1,=2
+   17 00000008 EB01 0200       ADD              R2,R1,R0    ; R2= R1 + R0
+   18 0000000C         
+   19 0000000C F000 F801       BL               __FUNC1     ; jump to __FUNC1 t
+                                                            hen return
+   20 00000010         
+   21 00000010 E002            B                __FUNC2     ; jump to __FUNC2 n
+                                                            ot return
+   22 00000012         
+   23 00000012         
+   24 00000012         __FUNC1
+   25 00000012 F04F 0006       LDR              R0,=6
+   26 00000016         
+   27 00000016 46F7            MOV              PC,R14      ; move R14 to PC
+   28 00000018         
+   29 00000018         
+   30 00000018         __FUNC2
+   31 00000018 F04F 0006       LDR              R0,=6
+   32 0000001C         
+   33 0000001C         ;IF FUNCTION
+   34 0000001C 2808            CMP              R0, #8
+   35 0000001E F04F 0008       MOV              R0, #8
+   36 00000022 2808            CMP              R0, #8
+   37 00000024 F04F 0300       MOV              R3, #0
+   38 00000028 D0FF            BEQ              __LOOP      ; Branch equal
+   39 0000002A         
+   40 0000002A         
+   41 0000002A         
+   42 0000002A         __LOOP
+   43 0000002A         ; LOOP FUNCTION
+   44 0000002A         
+   45 0000002A 2B0A            CMP              R3, #10
+   46 0000002C D002            BEQ              __WRITE
+   47 0000002E         ; DO SOMETHING
+   48 0000002E F103 0301       ADD              R3, #1
+   49 00000032 E7FA            B                __LOOP
+   50 00000034         
+   51 00000034         
+   52 00000034         __WRITE
+   53 00000034         ; WRITE TO SRAM
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   54 00000034 F04F 0003       LDR              R0,=3       ;
+   55 00000038 490D            LDR              R1,= RAM1_ADD
+   56 0000003A 4A0E            LDR              R2,= 0xABCDEF12
+   57 0000003C         
+   58 0000003C         
+   59 0000003C         __LOOP_WRITE
+   60 0000003C 600A            STR              R2,[R1]
+   61 0000003E F101 0104       ADD              R1,R1,#4
+   62 00000042 1E40            SUBS             R0,R0,#1    ; "s" uptade flags
+   63 00000044 D1FA            BNE              __LOOP_WRITE
+   64 00000046 E7FF            B                __COPY
+   65 00000048         
+   66 00000048         __COPY
+   67 00000048 F04F 0003       LDR              R0,=3
+   68 0000004C 4908            LDR              R1,= RAM1_ADD
+   69 0000004E 4A0A            LDR              R2,= RAM2_ADD
+   70 00000050 E7FF            B                __LOOP_COPY
+   71 00000052         
+   72 00000052         __LOOP_COPY
+   73 00000052 680B            LDR              R3,[R1]
+   74 00000054 6013            STR              R3,[R2]
+   75 00000056 F101 0104       ADD              R1,R1,#4
+   76 0000005A F102 0204       ADD              R2,R2,#4
+   77 0000005E 1E40            SUBS             R0,R0,#1
+   78 00000060 D1F7            BNE              __LOOP_COPY
+   79 00000062         
+   80 00000062         
+   81 00000062         ; shift variables: LSL, LSR
+   82 00000062         __SHIFT_FUNC
+   83 00000062 F04F 0001       LDR              R0,=1
+   84 00000066 EA4F 0140       LSL              R1,R0,#1
+   85 0000006A EA4F 0141       LSL              R1,R1,#1
+   86 0000006E         
+   87 0000006E         
+   88 0000006E         
+   89 0000006E         
+   90 0000006E E7FE    STOP    B                STOP
+   91 00000070                 END
+              20000020 
+              ABCDEF12 
+              20000030 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
+ork --depend=.\objects\main.d -o.\objects\main.o -I.\RTE\Device\STM32F103C8 -I.
+\RTE\_Start -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include -IC:\Keil_
+v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include --predefine="__MICROLIB SET
+A 1" --predefine="__UVISION_VERSION SETA 529" --predefine="_RTE_ SETA 1" --pred
+efine="STM32F10X_MD SETA 1" --list=.\listings\main.lst main.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+STOP 0000006E
+
+Symbol: STOP
+   Definitions
+      At line 90 in file main.s
+   Uses
+      At line 90 in file main.s
+Comment: STOP used once
+Start 00000000
+
+Symbol: Start
+   Definitions
+      At line 8 in file main.s
+   Uses
+      None
+Comment: Start unused
+__COPY 00000048
+
+Symbol: __COPY
+   Definitions
+      At line 66 in file main.s
+   Uses
+      At line 64 in file main.s
+Comment: __COPY used once
+__FUNC1 00000012
+
+Symbol: __FUNC1
+   Definitions
+      At line 24 in file main.s
+   Uses
+      At line 19 in file main.s
+Comment: __FUNC1 used once
+__FUNC2 00000018
+
+Symbol: __FUNC2
+   Definitions
+      At line 30 in file main.s
+   Uses
+      At line 21 in file main.s
+Comment: __FUNC2 used once
+__LOOP 0000002A
+
+Symbol: __LOOP
+   Definitions
+      At line 42 in file main.s
+   Uses
+      At line 38 in file main.s
+      At line 49 in file main.s
+
+__LOOP_COPY 00000052
+
+Symbol: __LOOP_COPY
+   Definitions
+      At line 72 in file main.s
+   Uses
+      At line 70 in file main.s
+      At line 78 in file main.s
+
+__LOOP_WRITE 0000003C
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+Relocatable symbols
+
+
+Symbol: __LOOP_WRITE
+   Definitions
+      At line 59 in file main.s
+   Uses
+      At line 63 in file main.s
+Comment: __LOOP_WRITE used once
+__SHIFT_FUNC 00000062
+
+Symbol: __SHIFT_FUNC
+   Definitions
+      At line 82 in file main.s
+   Uses
+      None
+Comment: __SHIFT_FUNC unused
+__WRITE 00000034
+
+Symbol: __WRITE
+   Definitions
+      At line 52 in file main.s
+   Uses
+      At line 46 in file main.s
+Comment: __WRITE used once
+__main 00000000
+
+Symbol: __main
+   Definitions
+      At line 14 in file main.s
+   Uses
+      At line 10 in file main.s
+Comment: __main used once
+11 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Absolute symbols
+
+RAM1_ADD 20000020
+
+Symbol: RAM1_ADD
+   Definitions
+      At line 4 in file main.s
+   Uses
+      At line 55 in file main.s
+      At line 68 in file main.s
+
+RAM2_ADD 20000030
+
+Symbol: RAM2_ADD
+   Definitions
+      At line 5 in file main.s
+   Uses
+      At line 69 in file main.s
+Comment: RAM2_ADD used once
+2 symbols
+349 symbols in table
