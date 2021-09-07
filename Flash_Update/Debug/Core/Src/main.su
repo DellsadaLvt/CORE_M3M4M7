@@ -1,0 +1,7 @@
+core_cm3.h:1639:22:__NVIC_SetPriority	16	static
+core_cm3.h:1834:26:SysTick_Config	16	static
+main.c:66:5:main	128	static
+main.c:123:6:SystemClock_Config	72	static
+main.c:158:6:ConfigSysTick	4	static
+main.c:164:6:changeToUnprivilege	4	static,ignoring_inline_asm
+main.c:174:6:Error_Handler	4	static,ignoring_inline_asm

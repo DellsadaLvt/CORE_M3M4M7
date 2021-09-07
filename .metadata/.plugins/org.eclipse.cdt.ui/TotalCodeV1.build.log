@@ -1,0 +1,24 @@
+21:51:17 **** Incremental Build of configuration Debug for project TotalCodeV1 ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:53:7: error: expected '(' before 'void'
+   53 | __asm void DemoASM( void );
+      |       ^~~~
+      |       (
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:91:3: warning: implicit declaration of function 'DemoASM' [-Wimplicit-function-declaration]
+   91 |   DemoASM();
+      |   ^~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:165:7: error: expected '(' before 'void'
+  165 | __asm void DemoASM( void ){
+      |       ^~~~
+      |       (
+../Core/Src/main.c:166:9: error: stray '#' in program
+  166 |  MOV R0,#3
+      |         ^
+make: *** [Core/Src/subdir.mk:49: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+
+21:51:29 Build Failed. 4 errors, 1 warnings. (took 11s.612ms)
+

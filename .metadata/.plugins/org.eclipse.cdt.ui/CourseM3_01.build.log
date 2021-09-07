@@ -1,0 +1,10 @@
+14:42:57 **** Incremental Build of configuration Debug for project CourseM3_01 ****
+make -j8 all 
+arm-none-eabi-size   CourseM3_01.elf 
+   text	   data	    bss	    dec	    hex	filename
+   6156	     20	   1644	   7820	   1e8c	CourseM3_01.elf
+Finished building: default.size.stdout
+ 
+
+14:42:58 Build Finished. 0 errors, 0 warnings. (took 641ms)
+

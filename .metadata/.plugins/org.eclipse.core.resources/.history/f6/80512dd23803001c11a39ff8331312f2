@@ -1,0 +1,26 @@
+/*
+ * Stacking.c
+ *
+ *  Created on: Aug 22, 2021
+ *      Author: LAPTOP
+ */
+#include "Stacking.h"
+#include <stdint.h>
+
+uint32_t arr_u32Temp[10u];
+
+void copyStackingToRam( void ){
+	__asm volatile(
+
+			"MRS R0,MSP"
+			"PUSH {LR}"
+	);
+}
+
+
+
+
+
+
+
+

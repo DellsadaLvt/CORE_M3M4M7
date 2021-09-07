@@ -1,0 +1,22 @@
+/*
+ * Stacking.c
+ *
+ *  Created on: Aug 22, 2021
+ *      Author: LAPTOP
+ */
+#include "Stacking.h"
+
+void copyStackingToRam( void ){
+	__asm volatile(
+			"MRS R0, CONTROL\n"
+			"MSR CONTROL,R0\n"
+	);
+}
+
+
+
+
+
+
+
+

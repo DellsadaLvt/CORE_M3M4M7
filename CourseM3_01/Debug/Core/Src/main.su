@@ -1,0 +1,7 @@
+main.c:66:5:main	24	static
+main.c:131:6:SystemClock_Config	72	static
+main.c:166:6:Count1	16	static
+main.c:174:6:Count2	16	static
+main.c:182:6:ConfigSysTick	4	static
+main.c:197:6:HAL_TIM_PeriodElapsedCallback	16	static
+main.c:214:6:Error_Handler	4	static,ignoring_inline_asm

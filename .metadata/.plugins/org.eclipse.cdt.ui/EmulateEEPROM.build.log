@@ -1,0 +1,10 @@
+16:39:17 **** Incremental Build of configuration Debug for project EmulateEEPROM ****
+make -j8 all 
+arm-none-eabi-size   EmulateEEPROM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   6576	     44	   2640	   9260	   242c	EmulateEEPROM.elf
+Finished building: default.size.stdout
+ 
+
+16:39:18 Build Finished. 0 errors, 0 warnings. (took 597ms)
+

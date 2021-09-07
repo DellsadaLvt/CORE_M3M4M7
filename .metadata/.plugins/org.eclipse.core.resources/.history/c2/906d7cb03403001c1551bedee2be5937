@@ -1,0 +1,30 @@
+/*
+ * Stacking.c
+ *
+ *  Created on: Aug 22, 2021
+ *      Author: LAPTOP
+ */
+
+
+//__asm volatile void copyStackingToRam( void ){
+//	MRS R0, CONTROL
+//}
+
+__asm void SysTick_Handlersss(void)
+{
+	IMPORT ReadStackFarme
+
+	PRESERVE8 {TRUE}
+    MRS R0, MSP
+	PUSH {LR}
+	BL ReadStackFarme
+	POP {LR}
+	BX LR
+}
+
+
+
+
+
+
+

@@ -1,0 +1,2 @@
+Privileged.c:10:6:changeToUnprivileged	4	static,ignoring_inline_asm
+Privileged.c:20:6:changeToPrivileged	4	static,ignoring_inline_asm

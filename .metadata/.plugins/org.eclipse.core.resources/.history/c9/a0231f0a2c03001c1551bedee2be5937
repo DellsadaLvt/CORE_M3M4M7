@@ -1,0 +1,38 @@
+/*
+ * Privileged.c
+ *
+ *  Created on: Aug 22, 2021
+ *      Author: LAPTOP
+ */
+
+#include "Privileged.h"
+
+void changeToUnprivileged( void ){
+	//read
+		__asm volatile ("MRS R0,CONTROL");
+		//modify
+		__asm volatile ("ORR R0,R0,#0x01");
+		//write
+		__asm volatile ("MSR CONTROL,R0");
+}
+
+
+void changeToPrivileged( void ){
+	//read
+	__asm volatile ("MRS R0,CONTROL");
+	//modify
+	__asm volatile ("ORR R0,R0,#0x01");
+	//write
+	__asm volatile ("MSR CONTROL,R0");
+}
+
+
+
+
+
+
+
+
+
+
+
